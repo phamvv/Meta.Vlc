@@ -199,3 +199,9 @@ ModelManifest.xml
 
 # LocalHistory VS extension
 .localhistory/
+LibVlc/plugins/video_splitter/libwall_plugin.dll
+LibVlc/plugins/access/libaccess_bd_plugin.dll
+LibVlc/plugins/access/libbluray-j2se-0.7.0.jar
+LibVlc/plugins/access/libzip_plugin.dll
+LibVlc/plugins/video_filter/librss_plugin.dll
+LibVlc/plugins/video_filter/libremoteosd_plugin.dll

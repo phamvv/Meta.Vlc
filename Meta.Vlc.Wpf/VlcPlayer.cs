@@ -482,9 +482,9 @@ namespace Meta.Vlc.Wpf
             if (VlcMediaPlayer.Media != null) VlcMediaPlayer.Media.Dispose();
             
             VlcMediaPlayer.Media = VlcMediaPlayer.VlcInstance.CreateMediaFromLocation(uri.ToString());
-            VlcMediaPlayer.Media.ParseAsync();
+          //  VlcMediaPlayer.Media.ParseAsync();
 
-            _isDVD = VlcMediaPlayer.Media.Mrl.IsDriveRootDirectory();
+          //  _isDVD = VlcMediaPlayer.Media.Mrl.IsDriveRootDirectory();
         }
 
         /// <summary>
@@ -504,9 +504,9 @@ namespace Meta.Vlc.Wpf
             
             VlcMediaPlayer.Media = VlcMediaPlayer.VlcInstance.CreateMediaFromPath(path);
             VlcMediaPlayer.Media.AddOption(options);
-            VlcMediaPlayer.Media.ParseAsync();
+           // VlcMediaPlayer.Media.ParseAsync();
 
-            _isDVD = VlcMediaPlayer.Media.Mrl.IsDriveRootDirectory();
+          //  _isDVD = VlcMediaPlayer.Media.Mrl.IsDriveRootDirectory();
         }
 
         /// <summary>
@@ -523,9 +523,9 @@ namespace Meta.Vlc.Wpf
             
             VlcMediaPlayer.Media = VlcMediaPlayer.VlcInstance.CreateMediaFromLocation(uri.ToString());
             VlcMediaPlayer.Media.AddOption(options);
-            VlcMediaPlayer.Media.ParseAsync();
+         //   VlcMediaPlayer.Media.ParseAsync();
 
-            _isDVD = VlcMediaPlayer.Media.Mrl.IsDriveRootDirectory();
+         //  _isDVD = VlcMediaPlayer.Media.Mrl.IsDriveRootDirectory();
         }
 
         #endregion LoadMedia
