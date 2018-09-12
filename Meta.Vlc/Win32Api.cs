@@ -28,16 +28,16 @@ namespace Meta.Vlc
         {
             if (!System.IO.File.Exists(lpFileName))
             {
-                throw new Exception(String.Format("模块文件不存在:{0}", lpFileName));
+                throw new Exception(String.Format("Not Found:{0}", lpFileName));
             }
             var result = LoadLibraryStatic(lpFileName);
             if (result != IntPtr.Zero) return result;
             var error = GetLastError();
             if (error == 0)
             {
-                throw new Win32Exception("无法载入指定的模块,未知错误.");
+                throw new Win32Exception("load dll error.");
             }
-            throw new Win32Exception(error, "无法载入指定的模块.");
+            throw new Win32Exception(error, "load dll error.");
         }
 
         [DllImport("kernel32", CharSet = CharSet.Ansi, ExactSpelling = true, SetLastError = true,
@@ -58,9 +58,9 @@ namespace Meta.Vlc
                 int error = GetLastError();
                 if (error == 0)
                 {
-                    throw new Win32Exception("无法获取函数地址,未知错误.");
+                    throw new Win32Exception("Unable to get address of function, unknown error.");
                 }
-                throw new Win32Exception(error, "无法获取函数地址.");
+                throw new Win32Exception(error, "Unable to get address of function.");
             }
             return result;
         }

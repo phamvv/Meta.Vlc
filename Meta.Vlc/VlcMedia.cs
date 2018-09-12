@@ -99,12 +99,12 @@ namespace Meta.Vlc
         }
 
         /// <summary>
-        ///     获取一个值,该值指示当前模块是否被载入
+        ///     Get a value indicating whether the current module is loaded
         /// </summary>
         public static bool IsLibLoaded { get; private set; }
 
         /// <summary>
-        ///     获取媒体的时间长度
+        ///    get Time length of media
         /// </summary>
         public TimeSpan Duration
         {
@@ -112,7 +112,7 @@ namespace Meta.Vlc
         }
 
         /// <summary>
-        ///     获取该媒体的媒体资源地址
+        ///     Get the resource address of the media
         /// </summary>
         public String Mrl
         {
@@ -120,7 +120,7 @@ namespace Meta.Vlc
         }
 
         /// <summary>
-        ///     获取媒体当前状态
+        ///     Get the current status of the media
         /// </summary>
         public MediaState State
         {
@@ -138,10 +138,13 @@ namespace Meta.Vlc
             }
         }
 
+        /// <summary>
+        /// get error
+        /// </summary>
         public string Error { get; private set; }
 
         /// <summary>
-        ///     获取媒体当前统计
+        ///     Get media current statistics
         /// </summary>
         public MediaStats Stats
         {
@@ -151,12 +154,12 @@ namespace Meta.Vlc
                 {
                     return _stats;
                 }
-                throw new Exception("无法获取媒体统计信息");
+                throw new Exception("Unable to get media statistics");
             }
         }
 
         /// <summary>
-        ///     获取或设置由用户定义的媒体数据
+        ///     Get or set user-defined media data
         /// </summary>
         public IntPtr UserData
         {
@@ -166,7 +169,7 @@ namespace Meta.Vlc
         }
 
         /// <summary>
-        ///     获取一个值表示该媒体是否已经解析
+        ///     Get a value indicating whether the media has been parsed
         /// </summary>
         public bool IsParsed
         {
@@ -179,16 +182,18 @@ namespace Meta.Vlc
         }
 
         /// <summary>
-        ///     获取 Media 实例指针
+        ///     Get the Media instance pointer
         /// </summary>
         public IntPtr InstancePointer { get; private set; }
+
+
 
         public Vlc VlcInstance { get; private set; }
 
         public VlcEventManager EventManager { get; private set; }
 
         /// <summary>
-        ///     释放 VlcMedia 资源
+        ///     Freed  resource of VlcMedia
         /// </summary>
         public void Dispose()
         {
@@ -196,7 +201,8 @@ namespace Meta.Vlc
         }
 
         /// <summary>
-        ///     载入 LibVlc 的 Media 模块,该方法会在 <see cref="Vlc.LoadLibVlc()" /> 中自动被调用
+        ///     Load LibVlc of Media Module,
+        ///     This method will be called automatically in <see cref="Vlc.LoadLibVlc()" />
         /// </summary>
         /// <param name="libHandle"></param>
         /// <param name="libVersion"></param>
@@ -296,10 +302,10 @@ namespace Meta.Vlc
         public event EventHandler<ObjectEventArgs<MediaStateChangedArgs>> StateChanged;
 
         /// <summary>
-        ///     通过名称创建一个新的 VlcMedia
+        ///     Create a new one by name VlcMedia
         /// </summary>
-        /// <param name="vlc">Vlc 对象</param>
-        /// <param name="name">媒体名称</param>
+        /// <param name="vlc">Vlc Object</param>
+        /// <param name="name">Media name</param>
         public static VlcMedia CreateAsNewNode(Vlc vlc, String name)
         {
             GCHandle handle = GCHandle.Alloc(Encoding.UTF8.GetBytes(name), GCHandleType.Pinned);
@@ -310,10 +316,10 @@ namespace Meta.Vlc
         }
 
         /// <summary>
-        ///     通过给定的文件描述符创建一个新的 VlcMedia
+        ///     Create a new VlcMedia with the given file descriptor
         /// </summary>
-        /// <param name="vlc">Vlc 对象</param>
-        /// <param name="fileDescriptor">文件描述符</param>
+        /// <param name="vlc">Vlc Object</param>
+        /// <param name="fileDescriptor">File descriptor</param>
         public static VlcMedia CreateFormFileDescriptor(Vlc vlc, int fileDescriptor)
         {
             return new VlcMedia(vlc,
@@ -321,10 +327,10 @@ namespace Meta.Vlc
         }
 
         /// <summary>
-        ///     通过给定的文件 Url 创建一个新的 VlcMedia,该 Url 的格式必须以 "file://" 开头,参见 "RFC3986".
+        ///     Create a new VlcMedia with the given file Url,The Url Format must be start with "file:///", see "RFC3986".
         /// </summary>
-        /// <param name="vlc">Vlc 对象</param>
-        /// <param name="url">文件 Url</param>
+        /// <param name="vlc">Vlc Object</param>
+        /// <param name="url">Url</param>
         public static VlcMedia CreateFormLocation(Vlc vlc, String url)
         {
             GCHandle handle = GCHandle.Alloc(Encoding.UTF8.GetBytes(url), GCHandleType.Pinned);
@@ -335,10 +341,10 @@ namespace Meta.Vlc
         }
 
         /// <summary>
-        ///     通过给定的文件路径创建一个新的 VlcMedia
+        ///     Create a new VlcMedia from the given file path
         /// </summary>
-        /// <param name="vlc">Vlc 对象</param>
-        /// <param name="path">文件路径</param>
+        /// <param name="vlc">Vlc Object</param>
+        /// <param name="path">path of file</param>
         public static VlcMedia CreateFormPath(Vlc vlc, String path)
         {
             GCHandle handle = GCHandle.Alloc(Encoding.UTF8.GetBytes(path), GCHandleType.Pinned);
@@ -349,7 +355,7 @@ namespace Meta.Vlc
         }
 
         /// <summary>
-        ///     向一个媒体添加选项,这个选项将会确定媒体播放器将如何读取介质,
+        ///     Add an option to a media that will determine how the media player will read the media.
         /// </summary>
         /// <param name="options"></param>
         public void AddOption(params String[] options)
@@ -360,7 +366,7 @@ namespace Meta.Vlc
         }
 
         /// <summary>
-        ///     向一个媒体通过可配置的标志添加一个选项,这个选项将会确定媒体播放器将如何读取介质,
+        ///     Add an option to a media via a configurable flag that will determine how the media player will read the media.
         /// </summary>
         /// <param name="options"></param>
         /// <param name="flag"></param>
@@ -372,9 +378,9 @@ namespace Meta.Vlc
         }
 
         /// <summary>
-        ///     复制一个媒体对象
+        ///     Copy a media object
         /// </summary>
-        /// <returns>复制的媒体对象</returns>
+        /// <returns>Replicated media object</returns>
         public VlcMedia Duplicate()
         {
             return new VlcMedia(this, _duplicateFunction.Delegate(InstancePointer));
